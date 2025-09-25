@@ -111,5 +111,9 @@ def get_args(env: str) -> List:
         "cartpole_swing": "--env cartpole_swing --state_dim 4 --warm_up_steps 800 --total_steps 150000 --individual_learn_steps 100000 --lr 1e-4 --sr_method operon --patience 10 --horizon 100 --max_episodes 300".split(), 
         "tora": "--env tora --state_dim 4 --warm_up_steps 600 --total_steps 150000 --individual_learn_steps 150000 --lr 1e-4 --sr_method operon --patience 1000 --load_dynamic_model".split(), 
         "lalo": "--env lalo --state_dim 7 --warm_up_steps 600 --total_steps 150000 --individual_learn_steps 150000 --lr 1e-6 --sr_method operon --patience 10 --horizon 100 --max_episodes 300".split(), 
+        "hopper": "--env hopper --state_dim 11 --warm_up_steps 5000 --total_steps 300000 --individual_learn_steps 300000 --lr 1e-4 --sr_method operon --patience 10 --horizon 1000 --max_episodes 300000".split(),
+        "ant": "--env ant --state_dim 105 --warm_up_steps 5000 --total_steps 1000000 --individual_learn_steps 1000000 --lr 1e-4 --sr_method operon --patience 10 --horizon 1000 --max_episodes 1000000".split(),"hopper": "--env hopper --state_dim 11 --warm_up_steps 5000 --total_steps 300000 --individual_learn_steps 300000 --lr 1e-4 --sr_method operon --patience 10 --horizon 1000 --max_episodes 300000".split(),
+        "cheetah": "--env cheetah --state_dim 17 --warm_up_steps 5000 --total_steps 300000 --individual_learn_steps 300000 --lr 1e-4 --sr_method operon --patience 10 --horizon 1000 --max_episodes 300000".split(),
+        
     }
     return args_dict[env]

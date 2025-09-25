@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 
 import main_stable_baseline
 import utils.arguments
+import traceback
 
 
 def run_single_benchmark(benchmark: str):
@@ -19,6 +20,7 @@ def run_single_benchmark(benchmark: str):
     except Exception as e:
         # import pdb
         # pdb.set_trace()
+        print(traceback.format_exc())
         print(e)
         print(f"{benchmark} exited unexpectedly")
         return 0
@@ -182,6 +184,9 @@ if __name__ == "__main__":
             "cartpole_move",
             "cartpole_swing",
             "lalo",
+            "hopper",
+            "ant",
+            "cheetah",
         ], f"unknown benchmark {args.single}"
         run_single_benchmark(args.single)
         eval_plot()

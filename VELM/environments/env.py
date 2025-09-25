@@ -17,7 +17,7 @@ class GymENV(gym.Wrapper):
         # elif "Lander" in self.env_name:
             # self.sampler = NeuLanderSampler()
 
-    def reset(self):
+    def reset(self, seed, options):
         state = self.env.reset()
         # theta = np.arctan2(state[1], state[0])
         # theta_dot = state[2]

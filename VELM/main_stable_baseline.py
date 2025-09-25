@@ -47,7 +47,10 @@ operon_list = [
     "obstacle",
     "obstacle_mid",
     "road_2d",
-    "car_racing"
+    "car_racing",
+    "hopper",
+    "ant",
+    "cheetah"
 ]
 
 
@@ -132,7 +135,7 @@ class OurLogger(Logger):
 
     def manual_add(self, rwd, violations):
         self.reward_logs.append(rwd)
-        self.violation_logs.append(violations + self.violation_logs[-1])
+        self.violation_logs.append(violations)
         self.protected_episodes += 1
         self.check_terminate()
 
@@ -278,7 +281,6 @@ def learn_environment_model(
         reg = SymbolicRegressor(
             allowed_symbols="add,sub,mul,div,constant,variable,sin,cos",
             offspring_generator="basic",
-            local_iterations=5,
             max_length=50,
             initialization_method="btc",
             n_threads=10,
@@ -385,7 +387,9 @@ def train(args):
             neural_agent.logger.violation_logs = copy.deepcopy(
                 safeviolation_callback.safe_violations
             )
+            
         else:
+            print("Using random policy to gather data for operon")
             buffer = []
             observations = []
             next_observations = []
@@ -419,7 +423,7 @@ def train(args):
             print("episodes_rwd", episodes_rwd)
             print("episodes unsafe", episodes_unsafe)
 
-            for rwd, violations in zip(episode_rwd, episodes_unsafe):
+            for rwd, violations in zip(episodes_rwd, episodes_unsafe):
                 logger.manual_add(rwd, violations)
 
             # exit()
@@ -431,7 +435,7 @@ def train(args):
         with open(os.path.join(model_path, "model.txt")) as f:
             lines = f.readlines()
             learned_dynamic_model = [line[:-1] for line in lines]
-            print(f"loading dyancmic model from {model_path}")
+            print(f"loading dynamic model from {model_path}")
 
         if args.random:
             with open(os.path.join(model_path, "std.txt")) as f:

@@ -1,6 +1,7 @@
 import subprocess
 import time
 from typing import List, Optional
+import os
 
 import gymnasium as gym
 import numpy as np
@@ -54,13 +55,18 @@ def eval_controller_lagrange(
     # assert num_of_controller == len(controller) // controller_sz
 
     reshaped_controller = np.reshape(controller, (-1, controller_sz))
+    #check if directory exists, if not create it
+    env_name = config['eval_program'][config['eval_program'].rfind('/')+1:]
+    if not os.path.exists(f"./results/controllers/{env_name}"):
+        os.mkdir(f"./results/controllers/{env_name}")
     for seq, one_controller in enumerate(reshaped_controller):
-        fname = f"controller_{index}_{seq}"
+        fname = f"./results/controllers/{env_name}/controller_{index}"
         line = convert_to_polar_controller_format(state_dim, action_dim, one_controller)
         f = open(fname, "w")
         f.writelines(line)
         f.close()
-    cmd = [f"./{config['eval_program']}", f"controller_{index}"]
+    cmd = [f"./{config['eval_program']}", f"./results/controllers/{env_name}/controller_{index}"]
+    print(cmd)
     cmd.extend(args)
     # print(f"cmd is {cmd}")
     polar_output = subprocess.run(

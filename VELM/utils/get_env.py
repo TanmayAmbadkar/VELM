@@ -12,6 +12,9 @@ from environments.gymnasium_cartpole_move import GymnasiumCartPoleMove
 from environments.gymnasium_cartpole_swing import GymnasiumCartPoleSwing
 from environments.gymnasium_tora import Gymnasium_Tora
 from environments.gymnasium_lalo import Gymnasium_Lalo
+from environments.gymnasium_hopper import GymnasiumHopper
+from environments.gymnasium_ant import GymnasiumAnt
+from environments.gymnasium_cheetah import GymnasiumCheetah
 
 # simulated env
 from environments.gymnasium_obstacle_simulate import GymnasiumObstacleSimulate
@@ -27,6 +30,9 @@ from environments.gymnasium_cartpole_move_simulate import GymnasiumCartPoleMoveS
 from environments.gymnasium_cartpole_swing_simulate import GymnasiumCartPoleSwingSimulate
 from environments.gymnasium_tora_simulate import Gymnasium_ToraSimulate
 from environments.gymnasium_lalo_simulate import Gymnasium_LaloSimulate
+from environments.gymnasium_hopper_simulate import Gymnasium_HopperSimulate
+from environments.gymnasium_ant_simulate import Gymnasium_AntSimulate
+from environments.gymnasium_cheetah_simulate import Gymnasium_CheetahSimulate
 
 def get_env(env_name: str):
     # import pdb 
@@ -75,6 +81,15 @@ def get_env(env_name: str):
     elif env_name == "lalo":
         env_info = Gymnasium_Lalo()
         simulated_env_info = Gymnasium_LaloSimulate()
+    elif env_name == "hopper":
+        env_info = GymnasiumHopper()
+        simulated_env_info = Gymnasium_HopperSimulate()
+    elif env_name == "ant":
+        env_info = GymnasiumAnt()
+        simulated_env_info = Gymnasium_AntSimulate()
+    elif env_name == "cheetah":
+        env_info = GymnasiumCheetah()
+        simulated_env_info = Gymnasium_CheetahSimulate()
     else:
         assert False
 
