@@ -1,0 +1,7 @@
+experiments/*
+old_SRL_ENV/*
+*.pyc
+controller_*_*
+neural_path_*.png
+.vscode/*
+VELM/results/*
